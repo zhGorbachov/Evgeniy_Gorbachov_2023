@@ -1,15 +1,20 @@
 ﻿List<int> array = new List<int>();
+
 for(int i = 0; i < 10; i++)
 {
     Console.Write($"Enter {i + 1} number of array: ");
     array.Add(Convert.ToInt32(Console.ReadLine()));
 }
+
+Console.Write("Enter a number: ");
+int number = Convert.ToInt32(Console.ReadLine());
+
 for(int i = 0; i < 10; i++)
 {
-    for(int j = 1 + i; j < 10; j++)
+    if (array[i] == number)
     {
-        if (array[i] == array[j])
-            array.Add(array[i]);
+        array.Insert(i + 1, number);
+        i++;
     }
 }
 for (int i = 0; i < array.Count; i++)
