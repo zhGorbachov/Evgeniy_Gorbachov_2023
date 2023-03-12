@@ -4,11 +4,11 @@ List<Customer> customers = new List<Customer>(10)
     new Customer("Evgeniy", random.Next(1, 100), "Poltavskaya"),
     new Customer("Misha", random.Next(1, 100), "Kovelovka"),
     new Customer("Serega", random.Next(1, 100), "Popova"),
-    new Customer("Roma", random.Next(1, 100), "Nikolaevka"),
+    new Customer("Evgeniy", random.Next(1, 100), "Nikolaevka"),
     new Customer("Vito", random.Next(1, 100), "Siciliya"),
     new Customer("George", random.Next(1, 100), "Lelekovka"),
     new Customer("Yehor", random.Next(1, 100), "Rayon 55"),
-    new Customer("Vova", random.Next(1, 100), "Volkovo"),
+    new Customer("Solaire", random.Next(1, 100), "Volkovo"),
     new Customer("Solaire ", random.Next(1, 100), "Astora"),
     new Customer("Sigward", random.Next(1, 100), "Catharina"),
 };
@@ -16,12 +16,7 @@ List<Customer> customers = new List<Customer>(10)
 Console.Write("Enter name of customer: ");
 string nameOfCustomer = Console.ReadLine();
 
-foreach(var customer in customers)
-{
-    Console.WriteLine(customer.Name);
-}
-
-var selected = from x in customers where x.Name == nameOfCustomer where x.Age >= 18 select x;
+var selected = from x in customers where x.Name == nameOfCustomer select x;
 Console.WriteLine("==========================");
 
 foreach(var human in selected)
@@ -29,10 +24,13 @@ foreach(var human in selected)
     Console.WriteLine($"{human.Name} {human.Age}: {human.Address}");
 }
 
+var filtred = from x in selected where x.Age >= 18 select x;
+Console.WriteLine("========Filtred by age=========");
 
-
-
-
+foreach (var human in filtred)
+{
+    Console.WriteLine($"{human.Name} {human.Age}: {human.Address}");
+}
 
 
 class Customer
