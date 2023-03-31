@@ -138,130 +138,17 @@ switch (actionChoose)
     case "CA":
         var computer = new Computer();
 
-        computer.addDetailToComputer();
-
-        computer.VerificationOfWorking();
+        computer.AddDetailToComputer();
+        
         break;
     
     case "PS":
         Console.Write("Enter your budget, I know .. you saved it at school lunches: ");
         var budgetUser = double.Parse(Console.ReadLine());
-        var budgetFilter = budgetUser;
-        
-        var computerShop = new Computer();
+        Console.Write("Enter a budget of filter(max price of detail): ");
+        var budgetFilter = double.Parse(Console.ReadLine());
         var cart = new Cart();
-        var selectedMotherboards = new List<MotherBoard>();
-        var selectedCpus = new List<Cpu>();
-        var selectedGpus = new List<Gpu>();
-        var selectedRams = new List<Ram>();
-        var selectedDrives = new List<Drive>();
-
-        while (true)
-        {
-            computerShop.getInfo("cart");
-            string userInput = Console.ReadLine();
-
-            switch (userInput)
-            {
-                case "1":
-                    
-                    Console.Write("If you want to delete press - d or a - if you want to add detail: ");
-                    var actionMB = Console.ReadLine();
-                    if (actionMB == "d" && selectedMotherboards[0] != null) 
-                    { 
-                        cart.DeleteMotherboard();
-                    }
-                    else
-                    {
-                        selectedMotherboards.Add(cart.AddMotheRboard(motherBoardsShop, budgetFilter));
-                        cart.AddMotherboardToCart(selectedMotherboards);
-                    }
-                    continue;
-                case "2":
-                    Console.Write("If you want to delete press - d or a - if you want to add detail: ");
-                    var actionCP = Console.ReadLine();
-                    if (actionCP== "d" && cart.Cpus.Last().Name != null)
-                    {
-                        cart.DeleteCpu();
-                    }
-                    else
-                    {
-                        selectedCpus.Add(cart.AddCpu(cpusShop, budgetFilter));
-                        cart.AddCpuToCart(selectedCpus);
-                    }
-                    continue;
-                case "3":
-                    Console.Write("If you want to delete press - d or a - if you want to add detail: ");
-                    var actionGP = Console.ReadLine();
-                    if (actionGP== "d" && cart.Gpus.Last().Name != null)
-                    {
-                        cart.DeleteGpu();
-                    }
-                    else
-                    {
-                        selectedGpus.Add(cart.AddGpu(gpusShop, budgetFilter));
-                        cart.AddGpuToCart(selectedGpus);
-                    }
-                    continue;
-                case "4":
-                    Console.Write("If you want to delete press - d or a - if you want to add detail: ");
-                    var actionRM = Console.ReadLine();
-                    if (actionRM== "d" && cart.Rams.Last().Name != null)
-                    {
-                        cart.DeleteRam();
-                    }
-                    else
-                    {
-                        selectedRams.Add(cart.AddRam(ramsShop, budgetFilter));
-                        cart.AddRamToCart(selectedRams);
-                    }
-                    continue;
-                case "5":
-                    Console.Write("If you want to delete press - d or a - if you want to add detail: ");
-                    var actionDV = Console.ReadLine();
-                    if (actionDV== "d" && cart.Drives.Last().Name != null)
-                    {
-                        cart.DeleteDrive();
-                    }
-                    else
-                    {
-                        selectedDrives.Add(cart.AddDrive(drivesShop, budgetFilter));
-                        cart.AddDriveToCart(selectedDrives);
-                    }
-                    continue;
-                case "6":
-                    cart.getInfoAboutPC();
-                    continue;
-                case "7":
-                    Console.WriteLine("========================\n" +
-                                      "Computer will create only with last element of detail type (its for motherboard, cpu and gpu, and what about drives and rams they will all be added)!\n" +
-                                      "========================");
-                    try
-                    {
-                        computerShop.AddMotherBoard(cart.MotherBoards.Last());
-                        computerShop.AddCpu(cart.Cpus.Last());
-                        computerShop.AddGpu(cart.Gpus.Last());
-                        computerShop.AddRam(cart.Rams);
-                        computerShop.AddDrive(cart.Drives);
-                        if (budgetUser < computerShop.SumBudgetOfDetails())
-                        {
-                            Console.WriteLine("[FAIL] Your budget is less then budget of details in a cart!");
-                            break;
-                        }
-
-                        computerShop.VerificationOfWorking();
-                        computerShop.getInfoAboutPC(computerShop.MotherBoard, computerShop.Cpu, computerShop.Gpu, computerShop.Rams, computerShop.Drives);
-                    }
-                    catch
-                    {
-                        Console.WriteLine("[FAIL] You probably forgot to add detail to your cart");
-                    }
-                    
-                    break;
-            }
-            
-            break;
-        }
+        cart.AddDetailToCart(budgetUser, budgetFilter, motherBoardsShop, cpusShop, gpusShop, ramsShop, drivesShop);
         
         break;
     

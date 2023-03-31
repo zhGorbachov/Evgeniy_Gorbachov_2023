@@ -33,8 +33,8 @@ public class Cpu : Detail
     public override string InformationAbout()
     {
         return $"{base.InformationAbout()}" +
-               $"Socket: {Socket}\n" +
-               $"Cores: {Cores}\n" +
-               $"Frequency: {Frequency}";
+               $"| Socket: {Socket} |\n" +
+               $"| Cores: {Cores} |\n" +
+               $"| Frequency: {Frequency} |";
     }
 }

@@ -57,10 +57,10 @@ public class MotherBoard : Detail
     public override string InformationAbout()
     {
         return $"{base.InformationAbout()}" +
-               $"Socket: {Socket}\n" +
-               $"Memory Slots: {MemorySlots}\n" +
-               $"Interface type: {String.Join(", ", InterfaceType)}\n" +
-               $"Type of ram support: {String.Join(", ", TypeOfRamSupport)}";
+               $"| Socket: {Socket} |\n" +
+               $"| Memory Slots: {MemorySlots} |\n" +
+               $"| Interface type: {String.Join(", ", InterfaceType)} |\n" +
+               $"| Type of ram support: {String.Join(", ", TypeOfRamSupport)} |";
     }
     
 }

@@ -23,6 +23,6 @@ public class Ssd : Drive
     public override string InformationAbout()
     {
         return $"{base.InformationAbout()}\n" +
-               $"Lifetime: {Lifetime}";
+               $"| Lifetime: {Lifetime} |";
     }
 }

@@ -105,8 +105,8 @@ public class Computer
                           $"4)Add ram to {name}\n" +
                           $"5)Add drive to {name}\n" +
                           $"6)Info about {name}\n" +
-                          $"7)Exit\n" +
-                          $"|================|");
+                          "7)Exit\n" +
+                          "|================|");
     }
 
     public void getInfoAboutPC(MotherBoard motherBoard, Cpu cpu, Gpu gpu, List<Ram> rams, List<Drive> drives)
@@ -145,7 +145,7 @@ public class Computer
         
     }
     
-    public void addDetailToComputer()
+    public void AddDetailToComputer()
     {
         while (true)
         {
@@ -267,6 +267,7 @@ public class Computer
                     getInfoAboutPC(MotherBoard, Cpu, Gpu, Rams, Drives);
                     continue;
                 case "7":
+                    VerificationOfWorking();
                     break;
             }
             break;

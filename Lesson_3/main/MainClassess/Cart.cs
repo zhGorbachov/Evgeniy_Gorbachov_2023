@@ -185,5 +185,130 @@ public class Cart
     {
         Drives.RemoveAt(Drives.IndexOf(Drives.Last()));
     }
-    
+
+    public void AddDetailToCart(
+        double budgetUser, double budgetFilter,
+        List<MotherBoard> motherBoardsShop, List<Cpu> cpusShop,
+        List<Gpu> gpusShop, List<Ram> ramsShop, List<Drive> drivesShop)
+    {
+        var computerShop = new Computer();
+        var selectedMotherboards = new List<MotherBoard>();
+        var selectedCpus = new List<Cpu>();
+        var selectedGpus = new List<Gpu>();
+        var selectedRams = new List<Ram>();
+        var selectedDrives = new List<Drive>();
+
+        while (true)
+        {
+            computerShop.getInfo("cart");
+            string userInput = Console.ReadLine();
+
+            switch (userInput)
+            {
+                case "1":
+
+                    Console.Write("If you want to delete press - d or a - if you want to add detail: ");
+                    var actionMB = Console.ReadLine();
+                    if (actionMB == "d" && selectedMotherboards[0] != null)
+                    {
+                        DeleteMotherboard();
+                    }
+                    else
+                    {
+                        selectedMotherboards.Add(AddMotheRboard(motherBoardsShop, budgetFilter));
+                        AddMotherboardToCart(selectedMotherboards);
+                    }
+
+                    continue;
+                case "2":
+                    Console.Write("If you want to delete press - d or a - if you want to add detail: ");
+                    var actionCP = Console.ReadLine();
+                    if (actionCP == "d" && Cpus.Last().Name != null)
+                    {
+                        DeleteCpu();
+                    }
+                    else
+                    {
+                        selectedCpus.Add(AddCpu(cpusShop, budgetFilter));
+                        AddCpuToCart(selectedCpus);
+                    }
+
+                    continue;
+                case "3":
+                    Console.Write("If you want to delete press - d or a - if you want to add detail: ");
+                    var actionGP = Console.ReadLine();
+                    if (actionGP == "d" && Gpus.Last().Name != null)
+                    {
+                        DeleteGpu();
+                    }
+                    else
+                    {
+                        selectedGpus.Add(AddGpu(gpusShop, budgetFilter));
+                        AddGpuToCart(selectedGpus);
+                    }
+
+                    continue;
+                case "4":
+                    Console.Write("If you want to delete press - d or a - if you want to add detail: ");
+                    var actionRM = Console.ReadLine();
+                    if (actionRM == "d" && Rams.Last().Name != null)
+                    {
+                        DeleteRam();
+                    }
+                    else
+                    {
+                        selectedRams.Add(AddRam(ramsShop, budgetFilter));
+                        AddRamToCart(selectedRams);
+                    }
+
+                    continue;
+                case "5":
+                    Console.Write("If you want to delete press - d or a - if you want to add detail: ");
+                    var actionDV = Console.ReadLine();
+                    if (actionDV == "d" && Drives.Last().Name != null)
+                    {
+                        DeleteDrive();
+                    }
+                    else
+                    {
+                        selectedDrives.Add(AddDrive(drivesShop, budgetFilter));
+                        AddDriveToCart(selectedDrives);
+                    }
+
+                    continue;
+                case "6":
+                    getInfoAboutPC();
+                    continue;
+                case "7":
+                    Console.WriteLine("========================\n" +
+                                      "Computer will create only with last element of detail type (its for motherboard, cpu and gpu, and what about drives and rams they will all be added)!\n" +
+                                      "========================");
+                    try
+                    {
+                        computerShop.AddMotherBoard(MotherBoards.Last());
+                        computerShop.AddCpu(Cpus.Last());
+                        computerShop.AddGpu(Gpus.Last());
+                        computerShop.AddRam(Rams);
+                        computerShop.AddDrive(Drives);
+                        if (budgetUser < computerShop.SumBudgetOfDetails())
+                        {
+                            Console.WriteLine("[FAIL] Your budget is less then budget of details in a cart!");
+                            break;
+                        }
+
+                        computerShop.VerificationOfWorking();
+                        computerShop.getInfoAboutPC(computerShop.MotherBoard, computerShop.Cpu, computerShop.Gpu,
+                            computerShop.Rams, computerShop.Drives);
+                    }
+                    catch
+                    {
+                        Console.WriteLine("[FAIL] You probably forgot to add detail to your cart");
+                    }
+
+                    break;
+            }
+
+            break;
+        }
+    }
 }

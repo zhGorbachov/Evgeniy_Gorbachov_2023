@@ -30,7 +30,7 @@ public class Gpu : Detail
     public override string InformationAbout()
     {
         return $"{base.InformationAbout()}" +
-               $"Memory: {Memory}\n" +
-               $"Speed: {Speed}";
+               $"| Memory: {Memory} |\n" +
+               $"| Speed: {Speed} |";
     }
 }

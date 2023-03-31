@@ -30,7 +30,7 @@ public class Ram : Detail
     public override string InformationAbout()
     {
         return $"{base.InformationAbout()}" +
-               $"Type: {Type}\n" +
-               $"Size: {Size}";
+               $"| Type: {Type} |\n" +
+               $"| Size: {Size} |";
     }
 }

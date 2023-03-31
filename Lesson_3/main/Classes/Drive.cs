@@ -33,8 +33,8 @@ public abstract class Drive : Detail
     public override string InformationAbout()
     {
         return $"{base.InformationAbout()}" +
-               $"Size: {Size}\n" +
-               $"Speed: {Speed}\n" +
-               $"Interface type: {InterfaceType}";
+               $"| Size: {Size} |\n" +
+               $"| Speed: {Speed} |\n" +
+               $"| Interface type: {InterfaceType} |";
     }
 }

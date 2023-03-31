@@ -34,10 +34,7 @@ public abstract class Detail
         string nameDetail = Convert.ToString(this.GetType());
 
         return "|================|\n" +
-               $"Name: {Name}\n" +
-               $"Cost: {Price}\n" +
-               $"Made in: {Country}\n" +
-               $"By: {Supplier}\n" +
+               $"| Name: {Name} | Cost: {Price} | Made in: {Country} | By: {Supplier} |\n" +
                $"--------{nameDetail.Split(".").Last()}--------\n";
     }
     
