@@ -13,13 +13,9 @@
             Balance = balance;
         }
         
-        public void GetBalance()
+        public void PrintBalance()
         {
-            Console.WriteLine($"Your balance is: {GetBalanceById()}");
-        }
-        public decimal GetBalanceById()
-        {
-            return this.Balance;
+            Console.WriteLine($"Your balance is: {this.Balance}");
         }
         public void SaveToDatabase()
         {
