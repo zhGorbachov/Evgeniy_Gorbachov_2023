@@ -1,6 +1,6 @@
 ﻿namespace Open_Closed;
 
-public class EarthMagic : MagicClass
+public class FireMgic : MagicClass
 {
     public override void CountYourMagic(int magic)
     {
