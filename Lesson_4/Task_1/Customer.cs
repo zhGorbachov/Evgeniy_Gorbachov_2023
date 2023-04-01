@@ -5,25 +5,42 @@
         public int Id { get; set; }
         public string Name { get; set; }
         public decimal Balance { get; set; }
+        public List<Customer> CustomersList { get; set; } = new List<Customer>();
         
         public Customer(int id, string name, decimal balance)
         {
             Id = id; 
             Name = name; 
             Balance = balance;
+            CustomersList.Add(this);
         }
-        
-        public void PrintBalance()
+
+        public void AddToCustomerList(Customer customer)
         {
-            Console.WriteLine($"Your balance is: {this.Balance}");
+            CustomersList.Add(customer);
+        }
+
+        public void PrintBalanceById(int id)
+        {
+            Console.WriteLine($"Your balance is: {GetBalanceById(id)}");
+        }
+        public decimal GetBalanceById(int id)
+        {
+            var customer = GetCustomerById(id);
+            return customer.Balance;
+        }
+        public Customer GetCustomerById(int id)
+        {
+            return CustomersList.FirstOrDefault(x => x.Id == id);
         }
         public void SaveToDatabase()
         {
             Console.WriteLine("Saved!");
         }
-        public void UpdateBalance(decimal newBalance)
+        public void UpdateBalanceById(int id, decimal newBalance)
         {
-            Balance = newBalance;
+            var customer = GetCustomerById(id);
+            customer.Balance = newBalance;
             SaveToDatabase();
         }
     }
