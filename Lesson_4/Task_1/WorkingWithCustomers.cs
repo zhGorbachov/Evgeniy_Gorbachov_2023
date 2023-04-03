@@ -21,14 +21,10 @@ public class WorkingWithCustomers
     {
         return CustomersList.FirstOrDefault(x => x.Id == id);
     }
-    public void SaveToDatabase()
-    {
-        Console.WriteLine("Saved!");
-    }
+    
     public void UpdateBalanceCustomerById(int id, decimal newBalance)
     {
         var customer = GetCustomerById(id);
         customer.Balance = newBalance;
-        SaveToDatabase();
     }
 }
