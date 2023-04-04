@@ -1,52 +1,24 @@
 ﻿namespace LiskovSubstitution;
 
-public class Owner : IOwner
+public class Owner : Administrator
 {
-    public void GetDataFromFile(string filename)
+    public override void GetDataFromFile(string filename)
     {
-        Console.WriteLine("Data got from file");
-    }
-    public string ReadFromFile(string filename)
-    {
-        Console.WriteLine("File read");
-        return null;
+        base.GetDataFromFile(filename);
     }
 
-    public void DownloadFile(string filename)
+    public override void DeleteFile(string filename)
     {
-        Console.WriteLine("File downloaded");
+        base.DeleteFile(filename);
     }
-
-    public void CopyFile(string filename)
+    
+    public override Guid CheckRole(Guid user)
     {
-        Console.WriteLine("File copied");
+        Console.WriteLine("User checked");
+        return user;
     }
-
-    public Guid CheckRole(Guid role)
-    {
-        return Guid.NewGuid();
-    }
-    public void WriteToFile(string filename)
-    {
-        Console.WriteLine("File wrote");
-    }
-
-    public void DeleteFile(string filename)
-    {
-        Console.WriteLine("File deleted");
-    }
-
-    public void CheckFile(string filename)
-    {
-        Console.WriteLine("File checked");
-    }
-
-    public void SaveToFile(string filename)
-    {
-        Console.WriteLine("File saved");
-    }
-
-    public Guid CheckUser(Guid user)
+    
+    public override Guid CheckUser(Guid user)
     {
         Console.WriteLine("User checked");
         return Guid.NewGuid();

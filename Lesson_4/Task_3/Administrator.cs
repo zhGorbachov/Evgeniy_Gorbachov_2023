@@ -1,50 +1,40 @@
 ﻿namespace LiskovSubstitution;
 
-public class Administrator : IAdministrator
+public class Administrator : User
 {
-    public string ReadFromFile(string filename)
+    public override void WriteToFile(string filename)
     {
-        Console.WriteLine("File read");
-        return null;
+        base.WriteToFile(filename);
     }
 
-    public void DownloadFile(string filename)
+    public override Guid CheckUser(Guid user)
     {
-        Console.WriteLine("File downloaded");
+        return base.CheckUser(user);
     }
 
-    public void CopyFile(string filename)
+    public virtual void GetDataFromFile(string filename)
     {
-        Console.WriteLine("File copied");
+        if(CheckRole(new Guid()) == new Guid("Owner"))
+            Console.WriteLine("File deleted");
     }
 
-    public Guid CheckRole(Guid role)
-    {
-        return Guid.NewGuid();
-    }
-    public void WriteToFile(string filename)
-    {
-        Console.WriteLine("File wrote");
-    }
-
-    public void DeleteFile(string filename)
+    public virtual void DeleteFile(string filename)
     {
         Console.WriteLine("File deleted");
     }
 
-    public void CheckFile(string filename)
+    public override void CheckFile(string filename)
     {
-        Console.WriteLine("File checked");
+        base.CheckFile(filename);
     }
 
-    public void SaveToFile(string filename)
+    public override void SaveToFile(string filename)
     {
-        Console.WriteLine("File saved");
+        base.SaveToFile(filename);
     }
 
-    public Guid CheckUser(Guid user)
+    public override Guid CheckRole(Guid role)
     {
-        Console.WriteLine("User checked");
-        return Guid.NewGuid();
+        return base.CheckRole(role);
     }
 }
