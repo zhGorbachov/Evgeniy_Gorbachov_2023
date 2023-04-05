@@ -3,4 +3,5 @@
 public interface IFlyable
 {
     public void Fly();
+    public void StartEngine();
 }

@@ -16,6 +16,6 @@ vehicles.Add(cycle);
 
 foreach (var vehicle in vehicles)
 {
-    vehicle.StartEngine();
+    vehicle.Fly();
     Console.WriteLine($"Its was: {vehicle.GetType()}\n");
 }
