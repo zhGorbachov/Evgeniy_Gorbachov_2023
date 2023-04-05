@@ -16,6 +16,7 @@ public class ManagerDrives : IWorkingDirectory
                 drive.Name, Math.Round(drive.TotalSize * Math.Pow(10, -9)),
                 Math.Round(drive.AvailableFreeSpace * Math.Pow(10, -9)));
         }
+        
     }
 
     public void PrintNameCurrentDirectory(string path)
@@ -92,7 +93,6 @@ public class ManagerDrives : IWorkingDirectory
             return dir;
         }
         Console.WriteLine($"Its directory doesnt exist: {dir}");
-        Console.WriteLine(current + "AAAAAA");
         return current;
     }
 

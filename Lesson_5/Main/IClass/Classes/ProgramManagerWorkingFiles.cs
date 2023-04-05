@@ -26,6 +26,7 @@ public static class ProgramManagerWorkingFiles
             var driveManager = new ManagerDrives();
             var folderManager = new FolderManager();
             var fileManager = new FileManager();
+            var drives = DriveInfo.GetDrives();
             string userInput;
             
             GetInfoAboutProgram();
@@ -134,14 +135,18 @@ public static class ProgramManagerWorkingFiles
 
                             break;
                         case "4":
-                            if (Path == "F:\\" || Path == "C:\\" || Path == "E:\\" ||
-                                Path == "F:/" || Path == "C:/" || Path == "E:/")
+                            var count = 0;
+                            foreach (var drive in drives)
                             {
-                                Console.WriteLine("You need to be in a folder to delete it.");
-                                break;
+                                if (drive.Name == Path)
+                                {
+                                    Console.WriteLine("Nu-nu-nu... You need to be in a folder to delete it.");
+                                    break;
+                                }
+                                count++;
                             }
-
-                            folderManager.DeleteFolder(Path);
+                            if (count == drives.Length)
+                                folderManager.DeleteFolder(Path);
 
                             break;
                         case "i":

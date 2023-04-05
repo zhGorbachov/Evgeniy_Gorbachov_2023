@@ -129,7 +129,7 @@ public class FolderManager
                           "| 1) Create folder in this dir              |\n" +
                           "| 2) Move folder to another directory       |\n" +
                           "| 3) Copy folder from it dir to another     |\n" +
-                          "| 4) Delete file from it directory          |\n" +
+                          "| 4) Delete folder from it directory        |\n" +
                           "| i) Information about folder               |\n" +
                           "| e) Go back                                |\n" +
                           "|-------------------------------------------|\n");
