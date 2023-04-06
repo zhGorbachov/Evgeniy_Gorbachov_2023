@@ -4,7 +4,7 @@ namespace Task_4.Classes;
 
 public class Vehicle : IFlyable
 {
-    public virtual void StartEngine()
+    public void StartEngine()
     {
         Console.WriteLine("The engine is starting");
     }

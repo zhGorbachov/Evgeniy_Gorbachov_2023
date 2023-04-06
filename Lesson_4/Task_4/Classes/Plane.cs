@@ -4,10 +4,6 @@ namespace Task_4.Classes;
 
 public class Plane : Vehicle
 {
-    public override void StartEngine()
-    {
-        
-    }
 
     public override void Fly()
     {

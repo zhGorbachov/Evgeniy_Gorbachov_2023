@@ -2,8 +2,5 @@
 
 public class Car : Vehicle
 {
-    public override void StartEngine()
-    {
-        Console.WriteLine("Engine does bur bur.");
-    }
+    
 }
