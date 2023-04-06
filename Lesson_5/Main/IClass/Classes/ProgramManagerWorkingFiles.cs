@@ -32,23 +32,32 @@ public static class ProgramManagerWorkingFiles
             GetInfoAboutProgram();
             
             var userAnswer = Console.ReadLine();
+            
+            if (Path.Last() != '/' && Path.Last() != '\\') 
+                Path += '/';
 
+            if (driveManager.CheckExistDir(Path) == false)
+            {
+                Console.WriteLine("It directory does not exist. Directory was changed on drive.");
+                Path = drives.First().Name;
+                continue;
+            }
+            
             switch (userAnswer)
             {
                 case "1":
                     driveManager.GetInformationAboutDirectory(Path);
-
-                    if (Path.Last() != '/' && Path.Last() != '\\')
-                        Path += '/';
-
                     Console.Write(Path);
                     var userPath = Console.ReadLine();
 
                     Path = driveManager.Cd(userPath, Path);
-
+                    
                     continue;
                 case "2":
                     fileManager.GetInformationAboutModules();
+
+                    Console.WriteLine("You need to be in a directory with function cd to choose some file: ");
+                    FilePath = Path;
 
                     userInput = Console.ReadLine();
 
@@ -61,8 +70,8 @@ public static class ProgramManagerWorkingFiles
 
                             break;
                         case "2":
-                            Console.Write("Enter a full path to file which you move: ");
-                            FilePath = Console.ReadLine();
+                            Console.Write("Enter a name of file which you move: ");
+                            FilePath += Console.ReadLine();
 
                             Console.Write("Enter a directory where you want to move file: ");
                             var filePathMove = Console.ReadLine();
@@ -70,8 +79,8 @@ public static class ProgramManagerWorkingFiles
 
                             break;
                         case "3":
-                            Console.Write("Enter a full path to file which you want to copy: ");
-                            FilePath = Console.ReadLine();
+                            Console.Write("Enter a name of file which you want to copy: ");
+                            FilePath += Console.ReadLine();
 
                             Console.Write("Enter a directory where you want to copy file: ");
                             var filePathCopy = Console.ReadLine();
@@ -79,20 +88,20 @@ public static class ProgramManagerWorkingFiles
 
                             break;
                         case "4":
-                            Console.Write("Enter a full path to file which you want to delete: ");
-                            FilePath = Console.ReadLine();
+                            Console.Write("Enter a name of file which you want to delete: ");
+                            FilePath += Console.ReadLine();
                             fileManager.DeleteFile(FilePath);
 
                             break;
                         case "5":
-                            Console.Write("You need to give full path to file: ");
-                            FilePath = Console.ReadLine();
+                            Console.Write("You need to give name of file: ");
+                            FilePath += Console.ReadLine();
                             fileManager.ReadFromFile(FilePath);
 
                             break;
                         case "6":
-                            Console.Write("Enter full path to file: ");
-                            FilePath = Console.ReadLine();
+                            Console.Write("Enter name of file: ");
+                            FilePath += Console.ReadLine();
 
                             Console.Write("Enter text: ");
                             var textFile = Console.ReadLine();
@@ -100,8 +109,8 @@ public static class ProgramManagerWorkingFiles
 
                             break;
                         case "i":
-                            Console.Write("Enter a full path to file: ");
-                            FilePath = Console.ReadLine();
+                            Console.Write("Enter a name of file: ");
+                            FilePath += Console.ReadLine();
 
                             fileManager.GetFileInfo(FilePath);
                             break;

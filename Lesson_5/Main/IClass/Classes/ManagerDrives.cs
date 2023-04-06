@@ -31,7 +31,7 @@ public class ManagerDrives : IWorkingDirectory
         
         for (int i = 0; i < files.Length; i++)
         {
-            files[i] = files[i].Split('\\').Last();
+            files[i] = files[i].Split("\\").Last().Split("/").Last();
             Console.WriteLine("| {0, -40} | {1, -10} |", files[i], "File");
         }
     }
@@ -42,7 +42,7 @@ public class ManagerDrives : IWorkingDirectory
         
         for (int i = 0; i < folders.Length; i++)
         {
-            folders[i] = folders[i].Split('\\').Last() + "/";
+            folders[i] = folders[i].Split('\\').Last().Split("/").Last() + "/";
             Console.WriteLine("| {0, -40} | {1, -10} |", folders[i], "Folder");
         }
     }
@@ -56,9 +56,9 @@ public class ManagerDrives : IWorkingDirectory
     
     public string Cd(string? name, string current)
     {
+        var info = new DirectoryInfo(current);
         if (name == "./")
         {
-            var info = new DirectoryInfo(current);
             
             if (info.FullName != current)
             {
@@ -80,7 +80,8 @@ public class ManagerDrives : IWorkingDirectory
 
             if (path == "")
             {
-                path = @"C:\";
+                var drives = DriveInfo.GetDrives().First();
+                path = drives.Name;
             }
             
             return path;
@@ -94,6 +95,17 @@ public class ManagerDrives : IWorkingDirectory
         }
         Console.WriteLine($"Its directory doesnt exist: {dir}");
         return current;
+    }
+
+    public bool CheckExistDir(string path)
+    {
+        var directory = new DirectoryInfo(path);
+        if (!directory.Exists)
+        {
+            return false;
+        }
+
+        return true;
     }
 
     public void GetInformationAboutModules()
