@@ -54,6 +54,7 @@ public static class ProgramManagerWorkingFiles
                     
                     continue;
                 case "2":
+                    
                     fileManager.GetInformationAboutModules();
 
                     Console.WriteLine("You need to be in a directory with function cd to choose some file: ");
@@ -66,43 +67,63 @@ public static class ProgramManagerWorkingFiles
                         case "1":
                             Console.Write("Enter name of file: ");
                             var nameFile = Console.ReadLine();
-                            FilePath = fileManager.CreateFile(Path, nameFile);
+                            fileManager.CreateFile(Path, nameFile);
 
                             break;
                         case "2":
                             Console.Write("Enter a name of file which you move: ");
                             FilePath += Console.ReadLine();
+                            if (fileManager.CheckExistFile(FilePath) == false)
+                            {
+                                break;
+                            }
 
                             Console.Write("Enter a directory where you want to move file: ");
                             var filePathMove = Console.ReadLine();
-                            FilePath = fileManager.MoveFile(FilePath, filePathMove);
+                            if (driveManager.CheckExistDir(filePathMove) == false)
+                                break;
+
+                            fileManager.MoveFile(FilePath, filePathMove);
 
                             break;
                         case "3":
                             Console.Write("Enter a name of file which you want to copy: ");
                             FilePath += Console.ReadLine();
+                            if (fileManager.CheckExistFile(FilePath) == false)
+                                break;
 
                             Console.Write("Enter a directory where you want to copy file: ");
                             var filePathCopy = Console.ReadLine();
-                            FilePath = fileManager.CopyFile(FilePath, filePathCopy);
+                            if (driveManager.CheckExistDir(filePathCopy) == false)
+                                break;
+                            
+                            fileManager.CopyFile(FilePath, filePathCopy);
 
                             break;
                         case "4":
                             Console.Write("Enter a name of file which you want to delete: ");
                             FilePath += Console.ReadLine();
+                            if (fileManager.CheckExistFile(FilePath) == false)
+                                break;
+                            
                             fileManager.DeleteFile(FilePath);
 
                             break;
                         case "5":
                             Console.Write("You need to give name of file: ");
                             FilePath += Console.ReadLine();
+                            if (fileManager.CheckExistFile(FilePath) == false)
+                                break;
+                            
                             fileManager.ReadFromFile(FilePath);
 
                             break;
                         case "6":
                             Console.Write("Enter name of file: ");
                             FilePath += Console.ReadLine();
-
+                            if (fileManager.CheckExistFile(FilePath) == false)
+                                break;
+                            
                             Console.Write("Enter text: ");
                             var textFile = Console.ReadLine();
                             fileManager.WriteToFile(FilePath, textFile);
@@ -111,7 +132,9 @@ public static class ProgramManagerWorkingFiles
                         case "i":
                             Console.Write("Enter a name of file: ");
                             FilePath += Console.ReadLine();
-
+                            if (fileManager.CheckExistFile(FilePath) == false)
+                                break;
+                            
                             fileManager.GetFileInfo(FilePath);
                             break;
                         case "e":

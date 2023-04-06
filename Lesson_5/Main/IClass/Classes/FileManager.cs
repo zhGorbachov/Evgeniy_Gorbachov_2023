@@ -37,6 +37,10 @@ public class FileManager : IFileManager
 
     public void GetFileInfo(string path)
     {
+        if (CheckExistFile(path) == false)
+        {
+            return;
+        }
         var info = new FileInfo(path);
         
         Console.WriteLine("| {0, -10} | {1, -20} | {2, -20} | {3, -20} | {4, -5} |\n|{5, 75}|",
@@ -49,11 +53,15 @@ public class FileManager : IFileManager
     
     public string MoveFile(string currentPath, string newPath)
     {
+        if (CheckExistFile(currentPath) == false)
+        {
+            return null;
+        }
         var fileInfo = new FileInfo(currentPath);
 
         var path = Path.Combine(newPath, fileInfo.Name);
         var fileInfoNew = new FileInfo(path);
-
+        
         if (!fileInfoNew.Exists)
         {
             fileInfo.MoveTo(path);
@@ -74,10 +82,15 @@ public class FileManager : IFileManager
 
     public string CopyFile(string currentPath, string newPath)
     {
+        if (CheckExistFile(currentPath) == false)
+        {
+            return null;
+        }
         var fileInfo = new FileInfo(currentPath);
 
         var path = Path.Combine(newPath, fileInfo.Name);
         var fileInfoNew = new FileInfo(path);
+
         
         if (!fileInfoNew.Exists)
         {
@@ -99,6 +112,10 @@ public class FileManager : IFileManager
 
     public void DeleteFile(string pathFile)
     {
+        if (CheckExistFile(pathFile) == false)
+        {
+            return;
+        }
         var fileInfo = new FileInfo(pathFile);
 
         if (fileInfo.Exists)
@@ -111,6 +128,10 @@ public class FileManager : IFileManager
     
     public void ReadFromFile(string path)
     {
+        if (CheckExistFile(path) == false)
+        {
+            return;
+        }
         using (FileStream fstream = File.OpenRead(path))
         {
             var bytes = new byte[fstream.Length];
@@ -124,10 +145,26 @@ public class FileManager : IFileManager
     
     public void WriteToFile(string path, string text)
     {
+        if (CheckExistFile(path) == false)
+        {
+            return;
+        }
         using FileStream fstream = new FileStream(path, FileMode.OpenOrCreate);
         var bytes = Encoding.Default.GetBytes(text);
             
         fstream.Write(bytes, 0, bytes.Length);
+    }
+
+    public bool CheckExistFile(string path)
+    {
+        var file = new FileInfo(path);
+        if (!file.Exists)
+        {
+            Console.WriteLine("It file does not exist.");
+            return false;
+        }
+
+        return true;
     }
     
     public void GetInformationAboutModules()
