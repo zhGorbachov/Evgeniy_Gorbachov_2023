@@ -28,7 +28,7 @@ public static class ProgramManagerWorkingFiles
             var fileManager = new FileManager();
             var drives = DriveInfo.GetDrives();
             string userInput;
-            
+
             GetInfoAboutProgram();
             
             var userAnswer = Console.ReadLine();
@@ -54,7 +54,6 @@ public static class ProgramManagerWorkingFiles
                     
                     continue;
                 case "2":
-                    
                     fileManager.GetInformationAboutModules();
 
                     Console.WriteLine("You need to be in a directory with function cd to choose some file: ");
@@ -73,13 +72,10 @@ public static class ProgramManagerWorkingFiles
                         case "2":
                             Console.Write("Enter a name of file which you move: ");
                             FilePath += Console.ReadLine();
-                            if (fileManager.CheckExistFile(FilePath) == false)
-                            {
-                                break;
-                            }
 
                             Console.Write("Enter a directory where you want to move file: ");
                             var filePathMove = Console.ReadLine();
+                            
                             if (driveManager.CheckExistDir(filePathMove) == false)
                                 break;
 
@@ -89,11 +85,10 @@ public static class ProgramManagerWorkingFiles
                         case "3":
                             Console.Write("Enter a name of file which you want to copy: ");
                             FilePath += Console.ReadLine();
-                            if (fileManager.CheckExistFile(FilePath) == false)
-                                break;
 
                             Console.Write("Enter a directory where you want to copy file: ");
                             var filePathCopy = Console.ReadLine();
+                            
                             if (driveManager.CheckExistDir(filePathCopy) == false)
                                 break;
                             
@@ -103,8 +98,6 @@ public static class ProgramManagerWorkingFiles
                         case "4":
                             Console.Write("Enter a name of file which you want to delete: ");
                             FilePath += Console.ReadLine();
-                            if (fileManager.CheckExistFile(FilePath) == false)
-                                break;
                             
                             fileManager.DeleteFile(FilePath);
 
@@ -112,8 +105,6 @@ public static class ProgramManagerWorkingFiles
                         case "5":
                             Console.Write("You need to give name of file: ");
                             FilePath += Console.ReadLine();
-                            if (fileManager.CheckExistFile(FilePath) == false)
-                                break;
                             
                             fileManager.ReadFromFile(FilePath);
 
@@ -121,8 +112,6 @@ public static class ProgramManagerWorkingFiles
                         case "6":
                             Console.Write("Enter name of file: ");
                             FilePath += Console.ReadLine();
-                            if (fileManager.CheckExistFile(FilePath) == false)
-                                break;
                             
                             Console.Write("Enter text: ");
                             var textFile = Console.ReadLine();
@@ -132,8 +121,6 @@ public static class ProgramManagerWorkingFiles
                         case "i":
                             Console.Write("Enter a name of file: ");
                             FilePath += Console.ReadLine();
-                            if (fileManager.CheckExistFile(FilePath) == false)
-                                break;
                             
                             fileManager.GetFileInfo(FilePath);
                             break;
@@ -151,34 +138,23 @@ public static class ProgramManagerWorkingFiles
                         case "1":
                             Console.Write("Enter name of folder: ");
                             var nameFolder = Console.ReadLine();
-                            folderManager.CreateFolder(Path, nameFolder);
+                            Path = folderManager.CreateFolder(Path, nameFolder);
 
                             break;
                         case "2":
                             Console.Write("Enter your new path: ");
                             var newPathMove = Console.ReadLine();
-                            Path = folderManager.MoveFolder(Path, newPathMove);
+                            Path = folderManager.MoveFolder(Path, newPathMove, drives.First().Name);
 
                             break;
                         case "3":
                             Console.Write("Enter you new path: ");
                             var newPathCopy = Console.ReadLine();
-                            Path = folderManager.CopyFolder(Path, newPathCopy);
+                            Path = folderManager.CopyFolder(Path, newPathCopy, drives.First().Name);
 
                             break;
                         case "4":
-                            var count = 0;
-                            foreach (var drive in drives)
-                            {
-                                if (drive.Name == Path)
-                                {
-                                    Console.WriteLine("Nu-nu-nu... You need to be in a folder to delete it.");
-                                    break;
-                                }
-                                count++;
-                            }
-                            if (count == drives.Length)
-                                folderManager.DeleteFolder(Path);
+                            folderManager.DeleteFolder(Path);
 
                             break;
                         case "i":
@@ -212,9 +188,7 @@ public static class ProgramManagerWorkingFiles
                     continue;
                 case "e":
                     break;
-
-                default:
-                    break;
+                
             }
 
             break;

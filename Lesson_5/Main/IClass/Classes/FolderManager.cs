@@ -1,4 +1,5 @@
-﻿namespace Main.IClass.Classes;
+﻿
+namespace Main.IClass.Classes;
 
 public class FolderManager
 {
@@ -28,22 +29,34 @@ public class FolderManager
 
     public void GetFolderInfo(string path)
     {
-        var info = new DirectoryInfo(path);
+        var folderInfo = new DirectoryInfo(path);
+        
+        if (!folderInfo.Exists)
+        {
+            Console.WriteLine("Folder does not exist.");
+            return;
+        }
         
         Console.WriteLine("| {0, -10} | {1, -20} | {2, -20} | {3, -20} |\n|{4, 75}|",
                     "Name", "Creation time", "Last changes time", "Folder directory", String.Concat(Enumerable.Repeat("-", 81)));
         
         Console.WriteLine("| {0, -10} | {1, 20} | {2, 20} | {3, -20} |\n|{4, 75}|",
-                    info.Name, info.CreationTime, info.LastWriteTime, info.FullName, String.Concat(Enumerable.Repeat("-", 81)));
+            folderInfo.Name, folderInfo.CreationTime, folderInfo.LastWriteTime, folderInfo.FullName, String.Concat(Enumerable.Repeat("-", 81)));
     }
     
-    public string MoveFolder(string currentPath, string newPath)
+    public string MoveFolder(string currentPath, string newPath, string disk)
     {
         var folderInfo = new DirectoryInfo(currentPath);
 
         var path = Path.Combine(newPath, folderInfo.Name);
         var folderInfoNew = new DirectoryInfo(path);
 
+        if (!folderInfo.Exists)
+        {
+            Console.WriteLine("Folder does not exist.");
+            return disk;
+        }
+        
         if (!folderInfoNew.Exists)
         {
             folderInfo.MoveTo(path);
@@ -59,15 +72,21 @@ public class FolderManager
             }
         }
 
-        return folderInfo.FullName;
+        return folderInfoNew.FullName;
     }
 
-    public string CopyFolder(string currentPath, string newPath)
+    public string CopyFolder(string currentPath, string newPath, string disk)
     {
         var folderInfo = new DirectoryInfo(currentPath);
         
         var path = Path.Combine(newPath, folderInfo.Name);
         var folderInfoNew = new DirectoryInfo(path);
+        
+        if (!folderInfo.Exists)
+        {
+            Console.WriteLine("Folder does not exist.");
+            return disk;
+        }
         
         if (!folderInfoNew.Exists)
         {
@@ -82,7 +101,7 @@ public class FolderManager
             
             foreach (var subFolder in folders)
             {
-                CopyFolder(subFolder.FullName, path);
+                CopyFolder(subFolder.FullName, path, disk);
             }
         }
         else
@@ -104,24 +123,39 @@ public class FolderManager
             
                 foreach (var subFolder in folders)
                 {
-                    CopyFolder(subFolder.FullName, path);
+                    CopyFolder(subFolder.FullName, path, disk);
                 }
             }
         }
-        
+
         return folderInfoNew.FullName;
     }
 
     public void DeleteFolder(string pathFolder)
     {
         var folderInfo = new DirectoryInfo(pathFolder);
-
-        if (folderInfo.Exists)
+        var drives = DriveInfo.GetDrives();
+        
+        var count = 0;
+        foreach (var drive in drives)
         {
-            folderInfo.Delete(true);
-            return;
+            if (drive.Name == pathFolder)
+            {
+                Console.WriteLine("Nu-nu-nu... You need to be in a folder to delete it.");
+                break;
+            }
+            count++;
         }
-        Console.WriteLine("Folder doesnt exist.");
+
+        if (count == drives.Length)
+        {
+            if (folderInfo.Exists)
+            {
+                folderInfo.Delete(true);
+                return;
+            }
+            Console.WriteLine("Folder doesnt exist.");
+        }
     }
     public void GetInformationAboutModules()
     {

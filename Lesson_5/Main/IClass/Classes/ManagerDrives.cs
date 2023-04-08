@@ -100,6 +100,8 @@ public class ManagerDrives : IWorkingDirectory
     public bool CheckExistDir(string path)
     {
         var directory = new DirectoryInfo(path);
+        
+        
         if (!directory.Exists)
         {
             return false;

@@ -15,19 +15,18 @@ public class FileManager : IFileManager
         {
             using (FileStream fileStream = File.Create(path))
             {
-                
             }
         }
         else
         {
             Console.Write($"File with it name {fileInfo.FullName} is exist, if you want to recreate it - print yes, or print any for continue working with it file: ");
             var userAnswer = Console.ReadLine();
+            
             if (userAnswer == "yes" || userAnswer == "Yes")
             {
                 File.Delete(path);
                 using (FileStream fileStream = File.Create(path))
                 {
-                    
                 }
             }
         } 
@@ -53,10 +52,12 @@ public class FileManager : IFileManager
     
     public string MoveFile(string currentPath, string newPath)
     {
+        var drives = DriveInfo.GetDrives();
         if (CheckExistFile(currentPath) == false)
         {
-            return null;
+            return drives.First().Name;
         }
+        
         var fileInfo = new FileInfo(currentPath);
 
         var path = Path.Combine(newPath, fileInfo.Name);
@@ -82,10 +83,12 @@ public class FileManager : IFileManager
 
     public string CopyFile(string currentPath, string newPath)
     {
+        var drives = DriveInfo.GetDrives();
         if (CheckExistFile(currentPath) == false)
         {
-            return null;
+            return drives.First().Name;
         }
+        
         var fileInfo = new FileInfo(currentPath);
 
         var path = Path.Combine(newPath, fileInfo.Name);
@@ -149,7 +152,7 @@ public class FileManager : IFileManager
         {
             return;
         }
-        using FileStream fstream = new FileStream(path, FileMode.OpenOrCreate);
+        using FileStream fstream = new FileStream(path, FileMode.Open);
         var bytes = Encoding.Default.GetBytes(text);
             
         fstream.Write(bytes, 0, bytes.Length);
