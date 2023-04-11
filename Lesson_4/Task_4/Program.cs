@@ -1,21 +1,8 @@
 ﻿using Task_4.Classes;
+using Task_4.Interfaces;
 
-var vehicles = new List<Vehicle>();
+var _vehicle = new Vehicle();
 
-var plane = new Plane();
+_vehicle.Airplane.Fly();
 
-var car = new Car();
-
-var cycle = new Motorcycle();
-
-vehicles.Add(plane);
-
-vehicles.Add(car);
-
-vehicles.Add(cycle);
-
-foreach (var vehicle in vehicles)
-{
-    vehicle.Fly();
-    Console.WriteLine($"Its was: {vehicle.GetType()}\n");
-}
+_vehicle.StartEngine();
