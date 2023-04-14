@@ -8,7 +8,7 @@ public class Vehicle
     
     public string Motorcycle { get; }
 
-    public Flyable Airplane { get; } = new Flyable();
+    public Flyable Airplane { get; set; }
 
     public void StartEngine()
     {
