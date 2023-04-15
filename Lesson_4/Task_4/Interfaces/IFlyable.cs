@@ -2,8 +2,5 @@
 
 public interface IFlyable
 {
-    public void Fly()
-    {
-        Console.WriteLine("It's flying?");
-    }
+    public void Fly();
 }

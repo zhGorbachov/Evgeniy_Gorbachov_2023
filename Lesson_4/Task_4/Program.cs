@@ -1,10 +1,21 @@
 ﻿using Task_4.Classes;
 using Task_4.Interfaces;
 
-var _vehicle = new Vehicle();
 
-_vehicle.Airplane = new Flyable();
+var airplane = new Airplane();
 
-_vehicle.Airplane.Fly();
+var car = new Car();
 
-_vehicle.StartEngine();
+var motorcycle = new Motorcycle();
+
+var vehicles = new List<Vehicle>()
+{
+    motorcycle, airplane, car
+};
+
+foreach (var veh in vehicles)
+{
+    Console.WriteLine(veh.GetType());
+    veh.StartEngine();
+    veh.Fly();
+}

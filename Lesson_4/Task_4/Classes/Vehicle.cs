@@ -2,15 +2,13 @@
 
 namespace Task_4.Classes;
 
-public class Vehicle
+public class Vehicle : IFlyable
 {
-    public string Car { get; }
-    
-    public string Motorcycle { get; }
-
-    public Flyable Airplane { get; set; }
-
-    public void StartEngine()
+    public virtual void Fly()
+    {
+        Console.WriteLine("It's flying?");
+    }
+    public virtual void StartEngine()
     {
         Console.WriteLine("The engine is starting");
     }
