@@ -1,6 +1,6 @@
 ﻿namespace Task_4.Interfaces;
 
-public interface IFlyable
+interface IFlyable
 {
-    public void Fly();
+    void Fly();
 }
