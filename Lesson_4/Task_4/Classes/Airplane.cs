@@ -2,9 +2,9 @@
 
 namespace Task_4.Classes;
 
-public class Airplane : Vehicle
+public class Airplane : Vehicle, IFlyable
 {
-    public override void Fly()
+    public void Fly()
     {
         Console.WriteLine("It's flying!");
     }

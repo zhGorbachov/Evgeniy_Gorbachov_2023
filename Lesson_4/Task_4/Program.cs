@@ -13,9 +13,10 @@ var vehicles = new List<Vehicle>()
     motorcycle, airplane, car
 };
 
+airplane.Fly();
+
 foreach (var veh in vehicles)
 {
     Console.WriteLine(veh.GetType());
     veh.StartEngine();
-    veh.Fly();
 }
